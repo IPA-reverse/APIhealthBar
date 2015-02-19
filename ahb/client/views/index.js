@@ -1,5 +1,5 @@
 if (Meteor.isClient){
-Template.index.events({
+Template.auth.events({
   "click #authenticate" : function() {
     console.log("click");
     var key,
