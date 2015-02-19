@@ -8,7 +8,29 @@ Template.index.events({
     key = $("#key").val();
     monitorID = $("#monitorID").val();
 
-    Meteor.call("apitoolsAuth", key, monitorID);
+    Session.set("apitoolsKey", key)
+    Session.set("apitoolsMonitorID", monitorID)
+
+    Meteor.call("apitoolsAuth", key, monitorID, function(err, res) {
+      if(res)
+        Session.set("XSRF-TOKEN", res);
+    });
+  },
+  "click #listServices" : function() {
+    key = Session.get("apitoolsKey");
+    monitorID = Session.get("apitoolsMonitorID");
+    Meteor.call("apitoolsListServices", key, monitorID, function(err, res) {
+      Session.set("apitoolsServicesList", res);
+      console.log(res);
+    });
+
   }
 })
+
+Template.servicesList.helpers({
+  "services": function() {
+    return Session.get("apitoolsServicesList");
+  }
+})
+
 }
