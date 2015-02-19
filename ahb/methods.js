@@ -3,10 +3,13 @@ if (Meteor.isServer) {
 Meteor.methods({
   "apitoolsAuth" : function(key, monitorID) {
     host = "https://" + key + "@" + monitorID + ".my.apitools.com/";
-    HTTP.get(host, { auth: key+":"+monitorID }, function(err, res) {
-      token = readCookie("XSRF-TOKEN", res.headers['set-cookie']);
-      console.log(token);
-    })
+    response = HTTP.get(host, { auth: key+":"+monitorID });
+    return readCookie("XSRF-TOKEN", response.headers['set-cookie']);
+  },
+  "apitoolsListServices" : function(key, monitorID) {
+    host = "https://" + key + "@" + monitorID + ".my.apitools.com/api/services";
+    response = HTTP.get(host, { auth: key+":"+monitorID });
+    return response.data;
   }
 });
 
