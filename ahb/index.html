@@ -3,6 +3,7 @@
   <body>
     {{ >index }}
     {{ >servicesList }}
+    {{ >newService }}
   </body>
 
 <template name="index">
@@ -18,4 +19,10 @@
   {{ #each services }}
     {{ name }}
   {{ /each }}
+</template>
+
+<template name="newService">
+  <input type="text" id="serviceName" value="nico">
+  <input type="text" id="serviceURL" value="https://api.panda.com">
+  <button type="submit" id="createService">Create service</button>
 </template>
