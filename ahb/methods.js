@@ -10,6 +10,31 @@ Meteor.methods({
     host = "https://" + key + "@" + monitorID + ".my.apitools.com/api/services";
     response = HTTP.get(host, { auth: key+":"+monitorID });
     return response.data;
+  },
+  "apitoolsCreateService" : function(name, endpoint, credentials) {
+    host = "https://" + credentials.key + "@" + credentials.monitorID + ".my.apitools.com/api/services";
+    try {
+      response = HTTP.post(host,
+        {
+          auth: credentials.key+":"+credentials.monitorID,
+          headers: {"X-XSRF-TOKEN": credentials.token, "Content-Type" : "application/json"},
+          data: {
+            endpoints:[{
+              url: endpoint,
+              code: URLify2(name)
+            }],
+            name:name
+          }
+        });
+      if (response.status == 201)
+        return true
+      else
+        return false
+      }
+    catch (e) {
+      throw new Meteor.Error(e)
+    }
+
   }
 });
 

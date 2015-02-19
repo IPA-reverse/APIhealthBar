@@ -21,9 +21,22 @@ Template.index.events({
     monitorID = Session.get("apitoolsMonitorID");
     Meteor.call("apitoolsListServices", key, monitorID, function(err, res) {
       Session.set("apitoolsServicesList", res);
-      console.log(res);
     });
 
+  }
+})
+
+Template.newService.events({
+  "click #createService" : function() {
+    name = $('#serviceName').val();
+    url = $('#serviceURL').val();
+    credentials = {
+      "key" : Session.get("apitoolsKey"),
+      "monitorID": Session.get("apitoolsMonitorID"),
+      "token": Session.get("XSRF-TOKEN")
+    }
+    Meteor.call("apitoolsCreateService", name, url, credentials, function(err, res) {
+    })
   }
 })
 
