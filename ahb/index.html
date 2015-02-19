@@ -4,6 +4,7 @@
     {{ >index }}
     {{ >servicesList }}
     {{ >newService }}
+    {{ >pushMiddleware }}
   </body>
 
 <template name="index">
@@ -25,4 +26,8 @@
   <input type="text" id="serviceName" value="nico">
   <input type="text" id="serviceURL" value="https://api.panda.com">
   <button type="submit" id="createService">Create service</button>
+</template>
+
+<template name="pushMiddleware">
+  <button type="submit" id="submitMiddleware">Push Middleware</button>
 </template>
