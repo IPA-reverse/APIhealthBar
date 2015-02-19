@@ -50,6 +50,7 @@ Template.servicesList.helpers({
 
 Template.pushMiddleware.events({
   "click #submitMiddleware" : function() {
+    console.log("pushing middleware...");
     code = "return function(request, next_middleware)\n  -- every middleware has to call next_middleware,\n  -- so others have chance to process the request/response\n\n  -- deal with request\n  local response = next_middleware()\n  send.notification({msg=response.status, level='info'})\n  -- deal with response\n  return response\nend";
     credentials = {
       "key" : Session.get("apitoolsKey"),
@@ -59,7 +60,7 @@ Template.pushMiddleware.events({
     serviceID = Session.get("apitoolsServiceID");
 
     Meteor.call("apitoolsPushMiddleware", serviceID, code, credentials, function(err, res){
-      console.log(res);
+      console.log("middleware res:", res);
     })
   }
 })
