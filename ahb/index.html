@@ -2,6 +2,7 @@
   <head></head>
   <body>
     {{ >index }}
+    {{ >servicesList }}
   </body>
 
 <template name="index">
@@ -9,4 +10,12 @@
   <input type="text" id="monitorID" value="2e1a00ee3fa3">
 
   <button type="submit" id="authenticate">Authenticate BIATCH!</button>
+
+  <button type="submit" id="listServices">List Services</button>
+</template>
+
+<template name="servicesList">
+  {{ #each services }}
+    {{ name }}
+  {{ /each }}
 </template>
