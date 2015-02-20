@@ -1,7 +1,7 @@
 return function(request, next_middleware)
 
   local response = next_middleware()
-  local SERVICE_ID = 16
+  local SERVICE_ID = SERVICE_ID_PLACEHOLDER
   local MONITOR_ID = "2e1a00ee3fa3"
 
   -- report metric, depending on status
