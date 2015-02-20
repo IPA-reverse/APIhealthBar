@@ -12,11 +12,19 @@ else
 end
 
 
-body = json.encode(clipmessage={
-                bridgeId: HUE_BRIDGE_ID,
-                clipCommand: {
-                  url: "/api/0/api/0/groups/0/action",
-                  method: "PUT", body: {"on": true, "hue": hue_status} } })
+body = json.encode({
+        bridgeId= HUE_BRIDGE_ID,
+        clipCommand= {
+          url= "/api/0/groups/0/action",
+          method= "PUT",
+          body= {
+            on= true,
+            hue= hue_status
+          }
+        }
+      })
 
-http.post =(hue_url+params, body, { headers = { Content-Type = 'application/x-www-form-urlencoded' }})
+hue_response = http.post(hue_url .. params, "clipmessage=" .. body, { headers = { ['Content-Type'] = 'application/x-www-form-urlencoded' }})
+
+console.log("hue_response", hue_response)
 -- /HUE module --
