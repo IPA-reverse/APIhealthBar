@@ -12,8 +12,11 @@ Template.auth.events({
     Session.set("apitoolsMonitorID", monitorID)
 
     Meteor.call("apitoolsAuth", key, monitorID, function(err, res) {
-      if(res)
+      if(res){
         Session.set("XSRF-TOKEN", res);
+        Blaze.insert(Blaze.render(Template.newService), $('.jumbotron').get(0));
+        $("#auth").remove()
+        }
     });
   },
   "click #listServices" : function() {
@@ -36,31 +39,21 @@ Template.newService.events({
       "token": Session.get("XSRF-TOKEN")
     }
     Meteor.call("apitoolsCreateService", name, url, credentials, function(err, res) {
-      console.log(res)
-      Session.set("apitoolsServiceID", res["_id"]);
+      if(res){
+          console.log(res)
+          Session.set("apitoolsServiceID", res["_id"]);
+          Meteor.call('insertService',name, url,res["_id"], credentials)
+          Blaze.insert(Blaze.render(Template.selectMiddleware), $('.jumbotron').get(0));
+          $("#newService").remove()
+      }
     })
+
   }
 })
 
 Template.servicesList.helpers({
   "services": function() {
     return Session.get("apitoolsServicesList");
-  }
-})
-
-Template.pushMiddleware.events({
-  "click #submitMiddleware" : function() {
-    console.log("pushing middleware...");
-    credentials = {
-      "key" : Session.get("apitoolsKey"),
-      "monitorID": Session.get("apitoolsMonitorID"),
-      "token": Session.get("XSRF-TOKEN")
-    }
-    serviceID = Session.get("apitoolsServiceID");
-
-    Meteor.call("apitoolsPushMiddleware", serviceID, credentials, function(err, res){
-      console.log("middleware res:", res);
-    })
   }
 })
 

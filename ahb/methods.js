@@ -73,7 +73,7 @@ Meteor.methods({
         });
 
         if (response.statusCode == 200) {
-          console.log(response);
+        //   console.log(response);
           return response.data;
         }
         else {
@@ -86,6 +86,20 @@ Meteor.methods({
         throw new Meteor.Error(e);
       }
 
+  },
+
+  insertService:function(name, endpoint, id,credentials){
+      console.log("INSERT SERVICE")
+      Services.insert({
+          name:name,
+          endpoint:endpoint,
+          service_id:id,
+          monitor_id:credentials.monitorID,
+          key: credentials.key,
+          status:"success"
+      },function(err,res){
+          console.log("INSERRT",err,res)
+      })
   }
 
 });

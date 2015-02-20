@@ -1,0 +1,37 @@
+<template name="selectMiddleware">
+    <div id="selectMiddleware">
+        <h3>Which type of notifications?</h3>
+            {{#each middleware}}
+            <div class="col-md-4 middlewareDetails" style="text-align:center;">
+                <div class="icon-part">
+                    <i class="fa fa-{{icon}}" style="font-size:40px;"></i>
+                </div>
+                <h3>{{name}}</h3>
+                <div class="service-content">
+                    <p>{{description}}</p>
+                </div>
+            </div>
+            {{/each}}
+      <button class="btn btn-primary" type="submit" id="submitMiddleware">Push Middleware</button>
+    </div>
+
+    <style media="screen">
+        .middlewareDetails:hover{
+            background-color:#2c3e50;
+            border-radius:15px;
+            color:white;
+        }
+        .middlewareDetails{
+            padding:5px;
+            margin-bottom:20px;
+        }
+    </style>
+</template>
+
+<template name="flowFinished">
+    <div id="name" style="font-size:50px;color:green;">
+        <i class="fa fa-smile-o"></i>
+        <i class="fa fa-beer"></i>
+    </div>
+    <h3>All cleared, relax and enjoy a beer.</h3>
+</template>

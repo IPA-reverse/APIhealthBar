@@ -7,7 +7,6 @@ binary-heap@1.0.2
 blaze@2.0.4
 blaze-tools@1.0.2
 boilerplate-generator@1.0.2
-bootstrap@1.0.1
 callback-hook@1.0.2
 check@1.0.4
 ddp@1.0.14
@@ -45,6 +44,7 @@ mongo@1.0.11
 observe-sequence@1.0.4
 ordered-dict@1.0.2
 peerlibrary:urlify2@0.2.3
+raix:handlebar-helpers@0.2.4
 random@1.0.2
 reactive-dict@1.0.5
 reactive-var@1.0.4
@@ -56,6 +56,7 @@ spacebars@1.0.5
 spacebars-compiler@1.0.4
 templating@1.0.11
 tracker@1.0.5
+twbs:bootstrap@3.3.2
 ui@1.0.5
 underscore@1.0.2
 url@1.0.3

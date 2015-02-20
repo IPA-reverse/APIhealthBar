@@ -1,30 +1,65 @@
 <template name="index">
-  {{ >auth }}
-  {{ >servicesList }}
-  {{ >newService }}
-  {{ >pushMiddleware }}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron" style="margin-top:10%;background-image:url('/images/logo.png');background-repeat: no-repeat;
+background-position-x: 100%;
+background-position-y: 100%;
+background-size: 25%;">
+                    <h1>APIHealthBar</h1>
+                    <h4><i>Go drink IPAs, we take care of your API</i></h4>
+                        {{>auth}}
+                </div>
+            </div>
+        </div>
+    </div>
+
 </template>
 
 <template name="auth">
-  <input type="text" id="key" value="144dca03d033fe2d5969301143622aa8">
-  <input type="text" id="monitorID" value="2e1a00ee3fa3">
+    <div id="auth">
+        <h3>Authenticate with your APItools credentials to get started</h3>
+        <div class="form-group">
+            <div class="input-group input-group-lg">
+                <label for="key">APItools key</label>
+                <input class="form-control" type="text" id="key" value="144dca03d033fe2d5969301143622aa8">
+            </div>
+        </div>
+        <div class="form-group">
+        <div class="input-group input-group-lg">
+            <label for="monitorID">Monitor ID</label>
+            <input class="form-control" type="text" id="monitorID" value="2e1a00ee3fa3">
+        </div>
+    </div>
 
-  <button type="submit" id="authenticate">Authenticate BIATCH!</button>
-  <button type="submit" id="listServices">List Services</button>
+        <button class="btn btn-primary" type="submit" id="authenticate">Authenticate</button>
+    </div>
 </template>
 
 <template name="servicesList">
-  {{ #each services }}
-    {{ name }}_{{_id}}
-  {{ /each }}
+    <div id="name">
+        <button type="submit" id="listServices">List Services</button>
+        {{ #each services }}
+          {{ name }}_{{_id}}
+        {{ /each }}
+    </div>
 </template>
 
 <template name="newService">
-  <input type="text" id="serviceName" value="nico">
-  <input type="text" id="serviceURL" value="https://dummyapi.scalingo.io">
-  <button type="submit" id="createService">Create service</button>
-</template>
-
-<template name="pushMiddleware">
-  <button type="submit" id="submitMiddleware">Push Middleware</button>
+    <div id="newService">
+        <h3>Create a new service</h3>
+        <div class="form-group">
+            <div class="input-group input-group-lg">
+                <label for="serviceName">Service Name</label>
+                <input class="form-control" type="text" id="serviceName" value="nico">
+            </div>
+        </div>
+        <div class="form-group">
+                <div class="input-group input-group-lg">
+                    <label for="serviceURL">Service URL</label>
+                <input class="form-control" type="text" id="serviceURL" value="https://dummyapi.scalingo.io">
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit" id="createService">Create service</button>
+    </div>
 </template>
