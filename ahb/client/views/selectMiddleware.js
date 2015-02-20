@@ -1,7 +1,6 @@
 Template.selectMiddleware.events({
   "click #submitMiddleware" : function() {
     console.log("pushing middleware...");
-    code = generateCode(serviceID);
     credentials = {
       "key" : Session.get("apitoolsKey"),
       "monitorID": Session.get("apitoolsMonitorID"),
@@ -10,7 +9,11 @@ Template.selectMiddleware.events({
     serviceID = Session.get("apitoolsServiceID");
 
     Meteor.call("apitoolsPushMiddleware", serviceID, credentials, function(err, res){
-      console.log("middleware res:", res);
+        if(res){
+          console.log("middleware res:", res);
+          Blaze.insert(Blaze.render(Template.flowFinished), $('.jumbotron').get(0));
+          $("#selectMiddleware").remove()
+        }
     })
   }
 })
