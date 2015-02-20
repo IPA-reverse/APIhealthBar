@@ -12,8 +12,11 @@ Template.auth.events({
     Session.set("apitoolsMonitorID", monitorID)
 
     Meteor.call("apitoolsAuth", key, monitorID, function(err, res) {
-      if(res)
+      if(res){
         Session.set("XSRF-TOKEN", res);
+        Blaze.insert(Blaze.render(Template.newService), $('.jumbotron').get(0));
+        $("#auth").remove()
+        }
     });
   },
   "click #listServices" : function() {
@@ -36,8 +39,12 @@ Template.newService.events({
       "token": Session.get("XSRF-TOKEN")
     }
     Meteor.call("apitoolsCreateService", name, url, credentials, function(err, res) {
-      console.log(res)
-      Session.set("apitoolsServiceID", res["_id"]);
+      if(res){
+          console.log(res)
+          Session.set("apitoolsServiceID", res["_id"]);
+          Blaze.insert(Blaze.render(Template.pushMiddleware), $('.jumbotron').get(0));
+          $("#newService").remove()
+      }
     })
   }
 })

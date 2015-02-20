@@ -11,5 +11,6 @@ iron:router
 gfk:notifications
 aldeed:collection2
 aldeed:simple-schema
-bootstrap
 fortawesome:fontawesome
+twbs:bootstrap
+raix:handlebar-helpers
