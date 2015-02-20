@@ -12,16 +12,18 @@
         <button class="apiCall" data-status="500" data-times="20">20 500 </button>
 
         <script charset="utf-8">
-            var API_URL = "http://localhost:3000/"
+            var API_URL = "https://dummy-2e1a00ee3fa3.my.apitools.com/"
             $(".apiCall").click(function(){
                 var status = $(this).data('status');
                 var times = $(this).data('times');
 
                 for(var i = 0; i<times;i++){
-                    $.get(API_URL+status,function(res){
-                        if(res)
-                            console.log("res",res);
-                    })
+                    setInterval(function(){
+                        $.get(API_URL+status,function(res){
+                            if(res)
+                                console.log("res",res);
+                        })
+                    }, 5000)
                 }
             });
         </script>
