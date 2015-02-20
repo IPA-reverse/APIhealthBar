@@ -29,10 +29,11 @@ Meteor.methods({
         });
       if (response.statusCode == 201) {
         console.log(response);
+
         return response.data;
       }
       else {
-      console.log("false", response)
+      console.log("ERR", response)
         return false
       }
     }
@@ -42,10 +43,12 @@ Meteor.methods({
 
   },
 
-  "apitoolsPushMiddleware" : function(serviceID, code, credentials) {
+  "apitoolsPushMiddleware" : function(serviceID, credentials) {
     console.log("pushing middleware...");
     host = "https://" + credentials.key + "@" + credentials.monitorID + ".my.apitools.com/api/services/"+serviceID+"/pipeline";
     mw_uuid = uuid();
+    console.log("about to generate code...");
+    code = generateCode(serviceID);
     console.log("mw_uuid", mw_uuid);
     middlewares = {};
     middlewares[mw_uuid] = {
@@ -105,9 +108,31 @@ function readCookie(name, headers) {
 function uuid() {
   console.log("generating uuid...");
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-  var r, v;
-  r = Math.random() * 16 | 0;
-  v = c === 'x' ? r : r & 0x3 | 0x8;
-  return v.toString(16);
-});
+    var r, v;
+    r = Math.random() * 16 | 0;
+    v = c === 'x' ? r : r & 0x3 | 0x8;
+    return v.toString(16);
+  });
+}
+
+function generateCode(serviceID){
+  console.log("generating code...");
+  //1 get user settings
+  //2 then based on settings get snippets
+
+  //for presentation it will be hardcoded
+
+  header = Assets.getText('snippets/header.lua');
+  header = header.replace(/SERVICE_ID_PLACEHOLDER/i, serviceID);
+  //console.log(header);
+
+  console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+serviceID+"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+  //console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+header+"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
+  code = header +
+         Assets.getText('snippets/hue.lua') +
+         Assets.getText('snippets/footer.lua');
+  console.log(code);
+  return code
+
 }
