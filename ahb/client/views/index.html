@@ -4,8 +4,7 @@
             <div class="col-md-12">
                 <div class="jumbotron" style="margin-top:10%;">
                     <h1>APIHealthBar</h1>
-                    <h3>Authenticate with your APItools credentials to get started</h3>
-                        {{ >auth }}
+                        {{>auth}}
                 </div>
 
             </div>
@@ -16,6 +15,7 @@
 
 <template name="auth">
     <div id="auth">
+        <h3>Authenticate with your APItools credentials to get started</h3>
         <div class="form-group">
             <div class="input-group input-group-lg">
                 <label for="key">APItools key</label>
@@ -44,6 +44,7 @@
 
 <template name="newService">
     <div id="newService">
+        <h3>Create a new service</h3>
         <div class="form-group">
             <div class="input-group input-group-lg">
                 <label for="serviceName">Service Name</label>
@@ -57,11 +58,5 @@
             </div>
         </div>
         <button class="btn btn-primary" type="submit" id="createService">Create service</button>
-    </div>
-</template>
-
-<template name="pushMiddleware">
-    <div id="name">
-      <button type="submit" id="submitMiddleware">Push Middleware</button>
     </div>
 </template>

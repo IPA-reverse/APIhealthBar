@@ -42,7 +42,7 @@ Template.newService.events({
       if(res){
           console.log(res)
           Session.set("apitoolsServiceID", res["_id"]);
-          Blaze.insert(Blaze.render(Template.pushMiddleware), $('.jumbotron').get(0));
+          Blaze.insert(Blaze.render(Template.selectMiddleware), $('.jumbotron').get(0));
           $("#newService").remove()
       }
     })
@@ -52,22 +52,6 @@ Template.newService.events({
 Template.servicesList.helpers({
   "services": function() {
     return Session.get("apitoolsServicesList");
-  }
-})
-
-Template.pushMiddleware.events({
-  "click #submitMiddleware" : function() {
-    console.log("pushing middleware...");
-    credentials = {
-      "key" : Session.get("apitoolsKey"),
-      "monitorID": Session.get("apitoolsMonitorID"),
-      "token": Session.get("XSRF-TOKEN")
-    }
-    serviceID = Session.get("apitoolsServiceID");
-
-    Meteor.call("apitoolsPushMiddleware", serviceID, credentials, function(err, res){
-      console.log("middleware res:", res);
-    })
   }
 })
 
