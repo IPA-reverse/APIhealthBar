@@ -18,12 +18,12 @@
                 var times = $(this).data('times');
 
                 for(var i = 0; i<times;i++){
-                    setInterval(function(){
+                    // setInterval(function(){
                         $.get(API_URL+status,function(res){
                             if(res)
                                 console.log("res",res);
                         })
-                    }, 5000)
+                    // }, 5000)
                 }
             });
         </script>

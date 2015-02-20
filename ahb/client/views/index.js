@@ -42,10 +42,12 @@ Template.newService.events({
       if(res){
           console.log(res)
           Session.set("apitoolsServiceID", res["_id"]);
+          Meteor.call('insertService',name, url,res["_id"], credentials)
           Blaze.insert(Blaze.render(Template.selectMiddleware), $('.jumbotron').get(0));
           $("#newService").remove()
       }
     })
+
   }
 })
 
